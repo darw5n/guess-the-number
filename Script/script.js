@@ -106,7 +106,6 @@ submitBtn.addEventListener("click", function (e) {
     // console.log(e.currentTarget === this); // logs `true`
 
     console.log(randomNumber);
-    gameStart = true;
 
     const guessField = document.getElementById("guessField");
     const guessNumber = parseInt(guessField.value, 10);
@@ -116,9 +115,10 @@ submitBtn.addEventListener("click", function (e) {
         userFeedback("Not valid! Try a numb between 1 and 100");
         guessField.value = ""; //reset input
     } else if (!isNaN(guessNumber)) {
+        gameStart = true;
         checkGuess(guessNumber, randomNumber);
         countAttempts();
-         guessField.value = "";  // Resetta il campo di input
+        guessField.value = "";  // Resetta il campo di input
     }else {
         console.log("Inserisci un valore");
     }
