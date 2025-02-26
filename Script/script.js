@@ -52,16 +52,44 @@ function restartGame() {
 }
 
 function checkGuess(uNumber, rndNumber) {
-    //confronta il numero inserito con quello generato
-    if (uNumber == rndNumber) {
-        gameStart = false;
+    const diff = Math.abs(uNumber - rndNumber);
+    console.log("Diff: "+diff);
+    // //confronta il numero inserito con quello generato
+    // if (uNumber == rndNumber) {
+    //     gameStart = false;
+    //     userFeedback("You won!");
+    //     updateButtons(); 
+    // } else if (uNumber > rndNumber) {
+    //     userFeedback("Try a smaller number");
+    // } else {
+    //     userFeedback("Try a larger number");
+    // }
+
+    if (uNumber === rndNumber) {
         userFeedback("You won!");
-        updateButtons(); 
-    } else if (uNumber > rndNumber) {
-        userFeedback("Try a smaller number");
-    } else {
-        userFeedback("Try a larger number");
-    }
+        gameStart = false;
+        submitBtn.disabled = true;
+        updateButtons();
+        return;
+      }
+    
+      // Impostiamo il feedback termico
+      let temperatureFeedback = "";
+      if (diff <= 5) {
+        temperatureFeedback = "Fire!";
+      } else if (diff <= 10) {
+        temperatureFeedback = "Warm!";
+      } else if (diff <= 20) {
+        temperatureFeedback = "Cold!";
+      } else {
+        temperatureFeedback = "You’re far away!";
+      }
+    
+      // Determina la direzione
+      const directionFeedback = uNumber > rndNumber ? "Try a smaller number." : "Try a larger number.";
+    
+      // Combina entrambi i feedback
+      userFeedback(`${temperatureFeedback} ${directionFeedback}`);
 
 }
 
